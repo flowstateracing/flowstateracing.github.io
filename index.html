@@ -4,15 +4,13 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Flowstate Racing</title>
-  <link rel="icon" href="favicon.ico">
-  <link rel="icon" type="image/svg+xml" href="VECTOR MAIN flowstate logo.svg">
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body id="top">
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#top">
-        <img class="brand-logo" src="VECTOR MAIN flowstate logo.svg" alt="Flowstate Racing logo" />
+        <img class="brand-logo" src="images/VECTOR MAIN flowstate logo.svg" alt="Flowstate Racing logo" />
         <span class="brand-name">Flowstate Racing</span>
       </a>
       <nav class="header-nav" aria-label="Main navigation">
@@ -37,7 +35,7 @@
       </div>
     </div>
     <div class="logo-placeholder">
-      <img src="VECTOR MAIN flowstate logo.svg" alt="Flowstate Racing Logo" />
+      <img src="images/VECTOR MAIN flowstate logo.svg" alt="Flowstate Racing Logo" />
     </div>
   </section>
 
@@ -224,31 +222,39 @@
       </div>
     </div>
   </section>
+  <footer class="site-footer" aria-label="AI disclosure">
+    <div class="container">
+      <p class="footer-text">AI was used in the making of this website</p>
+    </div>
+  </footer>
   <script>
     const hero = document.querySelector(".hero");
     const logo = document.querySelector(".logo-placeholder");
+    const pageRoot = document.body;
 
-    if (hero && logo) {
+    if (hero && logo && pageRoot) {
       let ticking = false;
 
-      const updateLogoParallax = () => {
+      const updatePageEffects = () => {
         const heroTop = hero.offsetTop;
         const heroHeight = hero.offsetHeight;
         const scrollProgress = Math.max(0, Math.min(window.scrollY - heroTop, heroHeight * 1.2));
         const offset = scrollProgress * 0.35;
+        const scrolledToBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
 
         logo.style.setProperty("--logo-parallax-offset", `${offset}px`);
+        pageRoot.classList.toggle("show-footer", scrolledToBottom);
         ticking = false;
       };
 
-      updateLogoParallax();
+      updatePageEffects();
       window.addEventListener("scroll", () => {
         if (!ticking) {
-          window.requestAnimationFrame(updateLogoParallax);
+          window.requestAnimationFrame(updatePageEffects);
           ticking = true;
         }
       }, { passive: true });
-      window.addEventListener("resize", updateLogoParallax);
+      window.addEventListener("resize", updatePageEffects);
     }
   </script>
 </body>
