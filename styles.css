@@ -26,6 +26,33 @@ a {
   margin: 0 auto;
 }
 
+.site-footer {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  padding: 18px 0 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(3, 17, 31, 0.92);
+  backdrop-filter: blur(10px);
+  transform: translateY(100%);
+  opacity: 0;
+  transition: transform 0.35s ease, opacity 0.35s ease;
+}
+
+body.show-footer .site-footer {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.footer-text {
+  font-size: 0.82rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+
 .site-header {
   position: sticky;
   top: 0;
@@ -495,6 +522,15 @@ h2 {
 @media (max-width: 700px) {
   .container {
     width: min(1200px, calc(100% - 60px));
+  }
+
+  .site-footer {
+    padding: 16px 0 20px;
+  }
+
+  .footer-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
   }
 
   .header-inner,
